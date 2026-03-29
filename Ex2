@@ -1,0 +1,40 @@
+@Test
+    public void textOnButton() // проверка текста "Customize" на кнопке
+    {
+        WebElement title_button = assertElementHasText(
+                By.id("org.wikipedia:id/view_announcement_action_positive"),
+                "Cannot find button",
+                5
+        );
+        String button_title = title_button.getAttribute("text");
+
+        Assert.assertEquals(
+                "We see unexpected text",
+                "Customize",
+                button_title
+        );
+    }
+
+    @Test
+    public void textInSearchInput()
+    {
+        WebElement input = assertElementHasText(
+                By.xpath("//*[@resource-id='org.wikipedia:id/search_container']//*[@text='Search Wikipedia']"),
+                "Cannot find input",
+                5
+        );
+        String input_text = input.getAttribute("text");
+
+        Assert.assertEquals(
+                "Wrong text in input",
+                "Search Wikipedia",
+                input_text
+        );
+    }
+private WebElement assertElementHasText(By by, String error_message, long timeoutInSeconds)
+    {
+        WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
+        WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(by));
+        return element;
+    }
+}
