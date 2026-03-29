@@ -1,0 +1,33 @@
+@Test
+    public void checkSearchResultEx4()
+    {
+        waitForElementAndClick(
+                By.id("org.wikipedia:id/search_container"),
+                "Cannot find Search Wikipedia input",
+                5
+        );
+
+        waitForElementAndSendKeys(
+                By.xpath("//*[contains(@text,'Search Wikipedia')]"),
+                "Java",
+                "Cannot find search input",
+                15
+        );
+        waitForElementPresent(
+                By.id("org.wikipedia:id/search_results_list"),
+                "Cannot find search results",
+                20
+        );
+        WebElement search_title = waitForElementPresent(
+                By.id("org.wikipedia:id/page_list_item_title"),
+                "Cannot find search result list",
+                15
+        );
+        String search_result_title = search_title.getAttribute("text");
+
+        Assert.assertEquals(
+                "No Java in search result",
+                "Java",
+                search_result_title
+        );
+    }
