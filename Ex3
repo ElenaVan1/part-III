@@ -1,27 +1,26 @@
-@Test
-    public void cancelSearchEx3()
-    {
-        waitForElementAndClick(
+ @Test
+    public void testCancelSearch_Ex3()
+{
+       waitForElementAndClick(
                 By.id("org.wikipedia:id/search_container"),
                 "Cannot find Search Wikipedia input",
                 5
         );
-
         waitForElementAndSendKeys(
                 By.xpath("//*[contains(@text,'Search Wikipedia')]"),
                 "Java",
                 "Cannot find search input",
-                15
-        );
-        waitForElementPresent(
-                By.id("org.wikipedia:id/search_results_list"),
-                "Cannot find search results",
-                20
+                5
         );
 
-        waitForElementAndClear(
-                By.id("org.wikipedia:id/search_src_text"),
-                "Cannot clear search",
-                15
+        waitForElementAndClick(
+                By.id("org.wikipedia:id/search_close_btn"),
+                "Cannot find X to cancel search",
+                5
+        );
+        waitForElementNotPresent(
+                By.id("org.wikipedia:id/search_close_btn"),
+                "X is still present on the page",
+                5
         );
     }
